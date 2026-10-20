@@ -157,6 +157,33 @@ main > section.wrap + section.wrap { padding-top: 72px; }
 .hero.wrap { padding-left: 24px; padding-right: 24px; }
 @media (max-width: 760px) { .hero.wrap { padding-left: 16px; padding-right: 16px; } }
 
+/* Resume page */
+.resume { padding-top: 72px; }
+.r-head { padding-bottom: 28px; }
+.r-head h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; }
+.r-title { font-size: 20px; color: var(--muted); margin-top: 8px; }
+.r-contact { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15px; color: var(--muted); }
+.r-contact a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.r-contact a:hover { text-decoration: underline; }
+.r-sec { border-top: 2px solid var(--ink); padding: 26px 0 36px; }
+.r-sec h2 { font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: .12em; color: var(--accent); margin: 0 0 18px; max-width: none; }
+.r-body { max-width: 760px; }
+.r-body p + p { margin-top: 14px; }
+.r-sec .org:first-of-type { border-top: 0; padding-top: 6px; }
+.r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.r-edu span { color: var(--muted); }
+@media (max-width: 760px) {
+  .resume { padding-top: 48px; }
+  .r-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+@media print {
+  nav, footer { display: none; }
+  body { background: #fff; color: #000; font-size: 12px; }
+  .resume { padding-top: 0; }
+}
+.resume .org h3 { font-size: 20px; line-height: 1.3; }
+
 /* Footer spacing */
 footer.wrap { padding-top: 32px; padding-bottom: 40px; border-top: 1px solid var(--line); }
 main { padding-bottom: 72px; min-height: calc(100vh - 60px - 94px); }
