@@ -119,6 +119,8 @@ main > section:first-child { padding-top: 72px; }
 
 /* Portfolio */
 .intro { font-size: 19px; color: var(--muted); max-width: 720px; }
+.intro strong { color: var(--ink); font-weight: 600; }
+.intro + .posts, .intro + .pieces { margin-top: 28px; }
 .group { font-size: 26px; margin-bottom: 24px; }
 .kicker { display: block; font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
 .more { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; }
@@ -128,10 +130,17 @@ main > section:first-child { padding-top: 72px; }
 .post { padding: 26px; display: flex; flex-direction: column; }
 .post h4, .piece h4 { font-family: Fraunces, Georgia, serif; font-size: 20px; line-height: 1.3; margin-bottom: 8px; }
 .post p, .piece p { color: var(--muted); font-size: 15px; }
-.post .more { margin-top: auto; padding-top: 14px; }
+.post .more { margin-top: auto; padding-top: 14px; align-self: center; }
 a.post:hover, a.piece:hover { transform: translateY(-3px); border-color: var(--accent); }
 .pieces { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.piece { display: grid; grid-template-columns: 200px 1fr; gap: 22px; padding: 20px; align-items: start; }
+.piece { display: grid; grid-template-columns: 200px 1fr; grid-template-rows: 1fr auto; gap: 18px 22px; padding: 20px; align-items: start; }
+.piece > .more, .piece > .links { grid-column: 1 / -1; margin-top: 0; }
+.piece > .more { justify-self: center; }
+.piece .links { display: flex; flex-wrap: wrap; justify-content: space-evenly; gap: 6px 18px; font-size: 14px; font-weight: 600; }
+.piece .links a { color: var(--ink); text-decoration: none; }
+.piece .links a:hover { color: var(--accent); }
+.piece > a { display: block; }
+.piece > a:hover img { border-color: var(--accent); }
 .piece img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid var(--line); }
 @media (max-width: 900px) {
   .pieces { grid-template-columns: 1fr; }
@@ -243,3 +252,6 @@ footer.wrap { width: 100%; }
   .rotator { display: none; }
   .rotator-text { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; }
 }
+
+/* Social logos next to LinkedIn and Instagram links */
+.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: .4em; }
