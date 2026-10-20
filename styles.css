@@ -304,3 +304,8 @@ body:has(#bg) nav { background: transparent; backdrop-filter: none; }
 /* Resume contact list: every icon gets the same 20px slot so the three lines' text starts at one edge */
 .r-contact .ico, .r-contact .emoji, .r-contact .emoji.emoji-pin { width: 20px; margin: 0 6px 0 0; text-align: center; }
 .r-contact .ico { box-sizing: border-box; padding: 0 2.5px; height: 15px; }
+
+/* Nav logo: full name when it fits beside the links; otherwise "Kavoosi" wraps to a hidden second line */
+nav .wrap { gap: 24px; }
+nav ul { flex-shrink: 0; }
+.logo { display: flex; flex-wrap: wrap; column-gap: .28em; flex: 0 1 auto; min-width: min-content; height: 1.3em; line-height: 1.3; overflow: hidden; }
