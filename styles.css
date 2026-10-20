@@ -81,6 +81,7 @@ section h2 { font-size: clamp(30px, 4.5vw, 42px); line-height: 1.15; margin-bott
 .role + .role { margin-top: 32px; }
 .role h4 { font-size: 18px; font-weight: 600; }
 .role .when { font-size: 14px; color: var(--muted); margin: 2px 0 10px; }
+.role h4 + ul { margin-top: 10px; }
 .role ul { padding-left: 18px; color: var(--muted); }
 .role li { margin-bottom: 6px; }
 .role li strong { color: var(--ink); font-weight: 600; }
@@ -122,8 +123,12 @@ main > section:first-child { padding-top: 72px; }
 .contact.page { margin: 0; min-height: calc(100vh - 60px - 78px); display: flex; align-items: center; }
 
 @media (max-width: 420px) {
-  nav .wrap { height: auto; flex-wrap: wrap; gap: 6px; padding-top: 10px; padding-bottom: 10px; }
-  nav ul { width: 100%; justify-content: space-between; }
+  nav .wrap { gap: 12px; }
+  nav ul { gap: 12px; }
+}
+@media (max-width: 360px) {
+  nav ul { gap: 10px; font-size: 12px; }
+  .logo { font-size: 16px; }
 }
 
 /* Portfolio */
@@ -196,3 +201,16 @@ footer.wrap { max-width: none; padding-left: max(24px, calc((100% - var(--max)) 
 .hero .stats { margin: 40px 0 36px; }
 .ext { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .ext:hover { color: var(--accent); text-decoration-color: currentColor; }
+
+/* Promotion tree: links each role back to the org heading */
+.roles { --tree: color-mix(in srgb, var(--muted) 40%, var(--bg)); padding-left: 28px; }
+.roles .role { position: relative; }
+.roles .role::before { content: ""; position: absolute; left: -22px; top: -32px; bottom: 0; border-left: 1px solid var(--tree); }
+.roles .role:first-child::before { top: 13px; }
+.roles .role:last-child::before { bottom: auto; height: calc(32px + 14px); }
+.roles .role::after { content: ""; position: absolute; left: -22px; top: 13px; width: 14px; border-top: 1px solid var(--tree); }
+@media (max-width: 760px) {
+  .roles { padding-left: 22px; margin-left: 4px; }
+  .roles .role::before, .roles .role::after { left: -20px; }
+  .roles .role:first-child::before { top: -14px; }
+}
