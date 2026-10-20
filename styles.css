@@ -200,3 +200,6 @@ footer.wrap { max-width: none; padding-left: max(24px, calc((100% - var(--max)) 
 .hero.wrap { padding-top: 96px; padding-bottom: 72px; }
 @media (max-width: 760px) { .hero.wrap { padding-top: 56px; padding-bottom: 48px; } }
 .hero .stats { margin: 40px 0 36px; }
+.photo { margin: 28px 0 32px; }
+.photo img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); }
+.photo figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); }
