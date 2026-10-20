@@ -27,6 +27,8 @@ nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(
 nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
 .logo { font-family: Fraunces, serif; font-weight: 600; font-size: 20px; text-decoration: none; }
 .logo span { color: var(--accent); }
+.logo { transition: opacity .25s, visibility .25s; }
+.logo.is-hidden { opacity: 0; visibility: hidden; }
 nav ul { list-style: none; display: flex; gap: 28px; font-size: 15px; }
 nav ul a { text-decoration: none; color: var(--muted); }
 nav ul a:hover { color: var(--ink); }
