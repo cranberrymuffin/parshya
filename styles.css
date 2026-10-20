@@ -297,8 +297,8 @@ body:has(#bg) nav { background: transparent; backdrop-filter: none; }
   .fit .hero .stat { padding-top: 14px; padding-bottom: 14px; }
   .fit .hero .lede { font-size: 17px; line-height: 1.5; }
 }
-/* Resume header icons in pink */
-.r-contact .ico { color: var(--accent); }
+/* Resume header: LinkedIn logo in LinkedIn's brand blue */
+.r-contact .ico { color: #0a66c2; }
 /* 📍 is tall and narrow with blank sides: match the 1em icons' height and trim the side space */
 .emoji.emoji-pin { font-size: 1.09em; vertical-align: -0.07em; margin-left: -0.25em; margin-right: .12em; }
 /* Resume contact list: every icon gets the same 20px slot so the three lines' text starts at one edge */
