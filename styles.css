@@ -199,3 +199,4 @@ footer.wrap { max-width: none; padding-left: max(24px, calc((100% - var(--max)) 
 .contact.page > .wrap { width: 100%; }
 .hero.wrap { padding-top: 96px; padding-bottom: 72px; }
 @media (max-width: 760px) { .hero.wrap { padding-top: 56px; padding-bottom: 48px; } }
+.hero .stats { margin: 40px 0 36px; }
