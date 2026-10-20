@@ -26,7 +26,7 @@ nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(
       backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
 .logo { font-family: Fraunces, serif; font-weight: 600; font-size: 20px; text-decoration: none; }
-.logo span { color: var(--accent); }
+.logo { color: var(--accent); }
 .logo { transition: opacity .25s, visibility .25s; }
 .logo.is-hidden { opacity: 0; visibility: hidden; }
 nav ul { list-style: none; display: flex; gap: 28px; font-size: 15px; }
@@ -162,10 +162,10 @@ section[id] { scroll-margin-top: 60px; }
 .r-head { padding-bottom: 28px; }
 .r-head h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; }
 .r-title { font-size: 20px; color: var(--muted); margin-top: 8px; }
-.r-contact { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15px; color: var(--muted); }
-.r-contact a { color: var(--accent); text-decoration: none; font-weight: 500; }
-.r-contact a:hover { text-decoration: underline; }
-.r-sec { border-top: 2px solid var(--ink); padding: 26px 0 36px; }
+.r-contact { margin-top: 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; font-size: 15px; color: var(--muted); }
+.r-contact a { color: var(--ink); font-weight: 500; text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.r-contact a:hover { color: var(--accent); text-decoration-color: currentColor; }
+.r-sec { border-top: 2px solid var(--line); padding: 26px 0 36px; }
 .r-sec h2 { font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase;
             letter-spacing: .12em; color: var(--accent); margin: 0 0 18px; max-width: none; }
 .r-body { max-width: 760px; }
@@ -257,3 +257,50 @@ footer.wrap { width: 100%; }
 
 /* Social logos next to LinkedIn and Instagram links */
 .ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: .4em; }
+
+/* Home and Contact: WebGL background behind the page */
+#bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+/* Let the gradient run up behind the nav (Home doesn't scroll, so nothing passes underneath) */
+body:has(#bg) nav { background: transparent; backdrop-filter: none; }
+/* Pink stat grid on Home, strong enough to read over the gradient */
+.hero .stats, .hero .stat { border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+.hero .stat b { color: var(--accent); }
+/* Home and Contact in pink: accent headings and buttons, deeper rose for body text so it stays readable */
+.hero h1, .contact h2 { color: var(--accent); }
+.hero .lede, .hero .stat span, .contact p:not(.label) { color: color-mix(in srgb, var(--accent) 70%, var(--ink)); }
+.hero .btn, .contact .btn { border-color: var(--accent); color: var(--accent); }
+.hero .btn.primary, .contact .btn.primary { background: var(--accent); color: #fff; }
+/* The envelope emoji is wider than tall, so scale it up to sit level with the 1em SVG icons */
+.emoji { display: inline-block; font-size: 1.3em; line-height: 1; vertical-align: -0.1em; margin-right: .25em; }
+
+/* Home stats as a looping strip (set up by script; without it they stay a grid) */
+.hero .stats.marquee { display: block; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.stats-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+.stats.marquee:hover .stats-track { animation-play-state: paused; }
+.stats.marquee .stat, .stats.marquee .stat + .stat { flex: none; width: 270px; padding-left: 24px; padding-right: 24px;
+  border-left: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-bottom: 0; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (max-width: 760px) { .stats.marquee .stat, .stats.marquee .stat + .stat { width: 200px; padding-left: 16px; padding-right: 16px; } }
+
+/* Pin the Home name to the same spot and size as the Resume heading, so switching tabs doesn't move it */
+.fit main:has(> .hero) { justify-content: flex-start; }
+.fit .hero.wrap { padding-top: 72px; }
+.fit .hero h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; margin-top: 0; animation: none; }
+@media (max-width: 760px) { .fit .hero.wrap { padding-top: 48px; } }
+/* With the name pinned to the top, tighten the space below it so Home still fits short screens */
+.fit .hero.wrap { padding-bottom: clamp(16px, 4vh, 72px); }
+.fit .hero .stats { margin: clamp(16px, 3.6vh, 40px) 0 clamp(16px, 3.2vh, 36px); }
+@media (max-height: 700px) {
+  .fit .hero h1 { margin-bottom: 10px; }
+  .fit .hero .stat { padding-top: 14px; padding-bottom: 14px; }
+  .fit .hero .lede { font-size: 17px; line-height: 1.5; }
+}
+/* Resume header icons in pink */
+.r-contact .ico { color: var(--accent); }
+/* 📍 is tall and narrow with blank sides: match the 1em icons' height and trim the side space */
+.emoji.emoji-pin { font-size: 1.09em; vertical-align: -0.07em; margin-left: -0.25em; margin-right: .12em; }
+/* Resume contact list: every icon gets the same 20px slot so the three lines' text starts at one edge */
+.r-contact .ico, .r-contact .emoji, .r-contact .emoji.emoji-pin { width: 20px; margin: 0 6px 0 0; text-align: center; }
+.r-contact .ico { box-sizing: border-box; padding: 0 2.5px; height: 15px; }
