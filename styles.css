@@ -158,7 +158,6 @@ main > section.wrap + section.wrap { padding-top: 72px; }
 @media (max-width: 760px) { .hero.wrap { padding-left: 16px; padding-right: 16px; } }
 
 /* Personal about page */
-.facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.facts .card { padding: 22px; }
-.facts .card h3 { font-size: 18px; margin-bottom: 2px; }
-.facts .card p { font-size: 15px; }
+.personal { max-width: 680px; }
+.personal p { font-size: 19px; }
+.personal p + p { margin-top: 16px; }
