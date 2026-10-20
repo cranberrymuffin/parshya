@@ -153,3 +153,4 @@ a.post:hover, a.piece:hover { transform: translateY(-3px); border-color: var(--a
 }
 main > section.wrap + section.wrap { padding-top: 72px; }
 .about p.label { font-size: 13px; }
+.org .now { font-weight: 400; font-size: .7em; color: var(--muted); }
