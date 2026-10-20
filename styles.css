@@ -7,16 +7,7 @@
   --accent: #d23c7c;
   --accent-soft: #fbdcea;
   --max: 1040px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1a0f15; --surface: #26161f; --ink: #fbe9f1; --muted: #c09aac;
-    --line: #3e2532; --accent: #f57fb2; --accent-soft: #4a1f33;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #1a0f15; --surface: #26161f; --ink: #fbe9f1; --muted: #c09aac;
-  --line: #3e2532; --accent: #f57fb2; --accent-soft: #4a1f33;
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -142,8 +133,6 @@ a.post:hover, a.piece:hover { transform: translateY(-3px); border-color: var(--a
 .pieces { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .piece { display: grid; grid-template-columns: 200px 1fr; gap: 22px; padding: 20px; align-items: start; }
 .piece img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid var(--line); }
-.aside { margin-top: 22px; font-weight: 600; }
-.aside a { color: var(--accent); }
 @media (max-width: 900px) {
   .pieces { grid-template-columns: 1fr; }
 }
@@ -152,6 +141,7 @@ a.post:hover, a.piece:hover { transform: translateY(-3px); border-color: var(--a
   .piece img { max-height: 340px; }
 }
 main > section.wrap + section.wrap { padding-top: 72px; }
+section[id] { scroll-margin-top: 60px; }
 .about p.label { font-size: 13px; }
 .hero.wrap { padding-left: 24px; padding-right: 24px; }
 @media (max-width: 760px) { .hero.wrap { padding-left: 16px; padding-right: 16px; } }
@@ -194,17 +184,14 @@ footer.wrap { max-width: none; padding-left: max(24px, calc((100% - var(--max)) 
 .ext { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .ext:hover { color: var(--accent); text-decoration-color: currentColor; }
 
-/* Promotion tree: links each role back to the org heading */
-.roles { --tree: color-mix(in srgb, var(--muted) 40%, var(--bg)); padding-left: 28px; }
-.roles .role { position: relative; }
-.roles .role::before { content: ""; position: absolute; left: -22px; top: -32px; bottom: 0; border-left: 1px solid var(--tree); }
-.roles .role:first-child::before { top: 13px; }
-.roles .role:last-child::before { bottom: auto; height: calc(32px + 14px); }
-.roles .role::after { content: ""; position: absolute; left: -22px; top: 13px; width: 14px; border-top: 1px solid var(--tree); }
+/* Promotion tree (mobile only): links each role back to the org heading */
 @media (max-width: 760px) {
-  .roles { padding-left: 22px; margin-left: 4px; }
-  .roles .role::before, .roles .role::after { left: -20px; }
+  .roles { --tree: color-mix(in srgb, var(--muted) 40%, var(--bg)); padding-left: 22px; margin-left: 4px; }
+  .roles .role { position: relative; }
+  .roles .role::before { content: ""; position: absolute; left: -20px; top: -32px; bottom: 0; border-left: 1px solid var(--tree); }
   .roles .role:first-child::before { top: -14px; }
+  .roles .role:last-child::before { bottom: auto; height: calc(32px + 14px); }
+  .roles .role::after { content: ""; position: absolute; left: -20px; top: 13px; width: 14px; border-top: 1px solid var(--tree); }
 }
 
 /* Home hero: staggered fade-up on load */
@@ -218,4 +205,41 @@ footer.wrap { max-width: none; padding-left: max(24px, calc((100% - var(--max)) 
 .hero .cta { animation-delay: .62s; }
 @media (prefers-reduced-motion: reduce) {
   .hero h1, .hero .lede, .hero .stat, .hero .cta { animation: none; }
+}
+
+/* Home and Contact fit the viewport; only Resume and Portfolio scroll */
+body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+main { flex: 1 0 auto; min-height: 0; }
+footer.wrap { width: 100%; }
+.fit main { padding-bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+.fit main > section:first-child { padding-top: 0; }
+.fit .hero.wrap { width: 100%; padding-top: clamp(24px, 6vh, 96px); padding-bottom: clamp(24px, 6vh, 72px); }
+.fit .hero .stats { margin: clamp(20px, 4.5vh, 40px) 0 clamp(20px, 4vh, 36px); }
+.fit .hero .stat { padding-top: clamp(16px, 3.5vh, 32px); padding-bottom: clamp(16px, 3.5vh, 32px); }
+.fit .contact { padding: clamp(24px, 6vh, 72px) 0; }
+.fit .hero h1 { font-size: clamp(40px, min(8vw, 10vh), 84px); margin-bottom: clamp(10px, 2.2vh, 20px); }
+.fit .hero .lede { font-size: clamp(17px, min(2.4vw, 2.8vh), 23px); }
+.fit .hero .cta { margin-top: 0; }
+@media (max-height: 760px) { .fit .hero .stat b { font-size: 32px; } }
+
+/* Home lede: cycle through formats */
+.rotator { display: inline-grid; vertical-align: top; overflow: hidden; color: var(--accent); }
+.rotator > a { grid-area: 1 / 1; white-space: nowrap; color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-decoration-thickness: 2px; text-underline-offset: 3px; animation: cycle 7.5s ease-in-out infinite both; }
+.rotator > a:hover { text-decoration-color: currentColor; }
+.rotator > a:nth-child(2) { animation-delay: 2.5s; }
+.rotator > a:nth-child(3) { animation-delay: 5s; }
+.rotator:hover > a { animation-play-state: paused; }
+@keyframes cycle {
+  0% { opacity: 0; transform: translateY(.6em); visibility: hidden; }
+  5%, 30% { opacity: 1; transform: none; visibility: visible; }
+  35%, 100% { opacity: 0; transform: translateY(-.6em); visibility: hidden; }
+}
+.rotator-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.rotator-text a { color: var(--accent); }
+/* Keyboard users tab into the static links, which then show in place of the animation */
+.lede:has(.rotator-text :focus-visible) .rotator { display: none; }
+.rotator-text:has(:focus-visible) { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; }
+@media (prefers-reduced-motion: reduce) {
+  .rotator { display: none; }
+  .rotator-text { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; }
 }
