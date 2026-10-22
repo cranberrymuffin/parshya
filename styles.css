@@ -147,6 +147,10 @@ a.post:hover, a.piece:hover { transform: translateY(-3px); border-color: var(--a
 @media (max-width: 900px) {
   .pieces { grid-template-columns: 1fr; }
 }
+/* Center a lone card in the last row */
+@media (min-width: 901px) {
+  .pieces > .piece:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 12px); }
+}
 @media (max-width: 520px) {
   .piece { grid-template-columns: 1fr; }
   .piece img { max-height: 340px; }
