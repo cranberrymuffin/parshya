@@ -159,7 +159,10 @@ section[id] { scroll-margin-top: 60px; }
 
 /* Resume page */
 .resume { padding-top: 72px; }
-.r-head { padding-bottom: 28px; }
+.r-head { padding-bottom: 28px; display: flex; align-items: center; gap: 32px; }
+.r-photo { width: 132px; height: 132px; flex: none; border-radius: 50%; object-fit: cover; border: 3px solid var(--surface);
+           box-shadow: 0 0 0 1px var(--line); }
+@media (max-width: 760px) { .r-head { flex-direction: column; align-items: flex-start; gap: 20px; } .r-photo { width: 104px; height: 104px; } }
 .r-head h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; }
 .r-title { font-size: 20px; color: var(--muted); margin-top: 8px; }
 .r-contact { margin-top: 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; font-size: 15px; color: var(--muted); }
