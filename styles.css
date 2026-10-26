@@ -147,10 +147,6 @@ a.post:hover, a.piece:hover { transform: translateY(-3px); border-color: var(--a
 @media (max-width: 900px) {
   .pieces { grid-template-columns: 1fr; }
 }
-/* Center a lone card in the last row */
-@media (min-width: 901px) {
-  .pieces > .piece:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 12px); }
-}
 @media (max-width: 520px) {
   .piece { grid-template-columns: 1fr; }
   .piece img { max-height: 340px; }
@@ -319,3 +315,18 @@ nav ul { flex-shrink: 0; }
 
 /* Visible to search engines and screen readers only */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Portfolio rows as horizontal strips that scroll sideways */
+.posts, .pieces { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  margin: -6px -24px 0; padding: 6px 24px 14px; scroll-padding: 0 24px;
+  scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+/* Cards stretch to fill a short row; a long row shows the edge of the next card so it reads as scrollable */
+.post, .piece { scroll-snap-align: start; }
+.post { flex: 1 0 280px; }
+.piece { flex: 1 0 440px; }
+@media (max-width: 760px) {
+  .posts, .pieces { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; scroll-padding: 0 16px; }
+  .post { flex-basis: 280px; }
+  .piece { flex-basis: 300px; grid-template-columns: 1fr; }
+  .piece img { max-height: 260px; }
+}
