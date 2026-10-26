@@ -1,0 +1,298 @@
+# Pages CMS setup (https://pagescms.org): the forms Parshya edits the site with.
+# Each entry edits one file in _data/, which Jekyll turns into the matching page.
+# Every key in those files needs a field here, even a hidden one: Pages CMS drops anything it doesn't know about when it saves.
+
+media:
+  - name: images
+    label: Images
+    input: img
+    output: /img
+    categories: [image]
+  - name: pdfs
+    label: PDFs
+    input: work
+    output: /work
+    extensions: [pdf]
+
+content:
+  - name: home
+    label: Home page
+    description: The big intro, the rotating words, and the stats on the home page.
+    type: file
+    path: _data/home.yml
+    format: yaml
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: intro
+        label: Intro sentence
+        description: The rotating words below are added to the end of this sentence.
+        type: text
+        required: true
+      - name: rotating_words
+        label: Rotating words
+        description: Exactly three. Each one links to a section of the portfolio.
+        type: object
+        list:
+          min: 3
+          max: 3
+          collapsible:
+            collapsed: true
+            summary: "{word}"
+        fields:
+          - name: word
+            label: Word or phrase
+            description: Lowercase, without a period, e.g. "blog posts".
+            type: string
+            required: true
+          - name: section
+            label: Links to portfolio section
+            description: Type the small pink label of a portfolio section exactly, e.g. "Email". Left blank, it links to the top of the portfolio.
+            type: string
+      - name: stats
+        label: Stats
+        type: object
+        list:
+          min: 1
+          max: 6
+          collapsible:
+            collapsed: true
+            summary: "{number} {caption}"
+        fields:
+          - name: number
+            label: Number
+            description: Shown big, e.g. "+75%" or "500K+". It counts up when the page loads.
+            type: string
+            required: true
+          - name: caption
+            label: Caption
+            type: string
+            required: true
+
+  - name: portfolio
+    label: Portfolio
+    description: Each section is one row of cards on the portfolio page. Drag sections or cards to reorder them.
+    type: file
+    path: _data/portfolio.yml
+    format: yaml
+    fields:
+      - name: sections
+        label: Sections
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}: {heading}"
+        fields:
+          - name: label
+            label: Small label
+            description: The small pink word above the heading, e.g. "Email".
+            type: string
+            required: true
+          - name: heading
+            label: Heading
+            type: string
+            required: true
+          - name: anchor
+            label: Anchor
+            type: string
+            hidden: true
+          - name: intro
+            label: Intro (optional)
+            description: A short paragraph under the heading.
+            type: rich-text
+          - name: layout
+            label: Card style
+            type: select
+            required: true
+            default: text
+            options:
+              values:
+                - value: images
+                  label: Cards with a cover image (carousels, flyers)
+                - value: text
+                  label: Text-only cards (blog posts, emails, web pages)
+          - name: button
+            label: Button text
+            description: Shown at the bottom of each card, e.g. "Read the post". An arrow is added for you.
+            type: string
+            required: true
+          - name: items
+            label: Cards
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - name: kicker
+                label: Small label
+                description: The small text above the title, e.g. "May 2026" or "How-to · Candid insights".
+                type: string
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                description: One or two sentences.
+                type: text
+              - name: image
+                label: Cover image
+                description: Only shown with the "Cards with a cover image" style. A tall image works best, e.g. the first slide.
+                type: image
+                options:
+                  media: images
+              - name: image_alt
+                label: Cover image description
+                description: Describe the image for people using screen readers, e.g. "First slide of the carousel: ..."
+                type: string
+              - name: pdf
+                label: PDF
+                description: Upload a PDF (email, carousel, or flyer) to link the card to it.
+                type: file
+                options:
+                  media: pdfs
+              - name: link
+                label: Web link
+                description: For a blog post or web page, paste its address. Used when there's no PDF.
+                type: string
+              - name: linkedin
+                label: LinkedIn post link (optional)
+                type: string
+              - name: instagram
+                label: Instagram post link (optional)
+                type: string
+
+  - name: resume
+    label: Resume
+    type: file
+    path: _data/resume.yml
+    format: yaml
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: title
+        label: Job title
+        type: string
+      - name: location
+        label: Location
+        type: string
+      - name: email
+        label: Email
+        type: string
+      - name: linkedin
+        label: LinkedIn profile link
+        type: string
+      - name: photo
+        label: Photo
+        type: image
+        options:
+          media: images
+      - name: about
+        label: About
+        type: rich-text
+      - name: jobs
+        label: Experience
+        description: Most recent first.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{org}"
+        fields:
+          - name: org
+            label: Organization
+            type: string
+            required: true
+          - name: org_link
+            label: Organization website (optional)
+            type: string
+          - name: extra_line
+            label: Extra line (optional)
+            description: E.g. "University of Maryland" or "Now The Knot Worldwide".
+            type: rich-text
+          - name: details
+            label: Details
+            description: E.g. "Full-time · Remote · 6 yrs 7 mos".
+            type: string
+          - name: dates
+            label: Dates
+            description: E.g. "Jan 2020 – Jul 2026".
+            type: string
+          - name: roles
+            label: Roles
+            description: Most recent first. Two or more roles are drawn as a promotion path.
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - name: title
+                label: Role title
+                type: string
+                required: true
+              - name: team
+                label: Team (optional)
+                description: Shown after the title, e.g. "Center for Social Value Creation".
+                type: string
+              - name: team_link
+                label: Team website (optional)
+                type: string
+              - name: dates
+                label: Dates (optional)
+                type: string
+              - name: highlights
+                label: Highlights
+                description: Use the bullet list button. Bold the numbers you want to stand out.
+                type: rich-text
+      - name: skills_heading
+        label: Skills heading
+        type: string
+      - name: skills
+        label: Skills
+        type: string
+        list: true
+      - name: tools_heading
+        label: Tools heading
+        type: string
+      - name: tools
+        label: Tools
+        type: string
+        list: true
+      - name: degree
+        label: Degree
+        type: string
+      - name: school
+        label: School
+        type: string
+      - name: school_link
+        label: School website (optional)
+        type: string
+
+  - name: contact
+    label: Contact page
+    type: file
+    path: _data/contact.yml
+    format: yaml
+    fields:
+      - name: heading
+        label: Heading
+        type: string
+        required: true
+      - name: text
+        label: Text
+        type: text
+      - name: email
+        label: Email
+        description: Where the "Email me" button sends messages.
+        type: string
+        required: true
+      - name: linkedin
+        label: LinkedIn profile link
+        type: string

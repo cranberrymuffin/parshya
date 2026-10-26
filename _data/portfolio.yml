@@ -1,0 +1,180 @@
+sections:
+- label: Social media
+  heading: Data carousels
+  anchor: social-posts
+  intro: ''
+  layout: images
+  button: View PDF
+  items:
+  - kicker: '2026'
+    title: 'Mission over myth: earned income'
+    description: A myth-vs-fact series on earned income, which makes up over 70% of nonprofit revenue. It ends with what nonprofits should and shouldn't do about the myth.
+    image: "/img/mission-over-myth-carousel.jpg"
+    image_alt: 'First slide of the Mission over myth carousel: Nonprofit funding is more than just donations.'
+    pdf: "/work/mission-over-myth-carousel.pdf"
+    link: ''
+    linkedin: https://www.linkedin.com/posts/mission-over-myth-demystifying-nonprofit-ugcPost-7485294767325650945-WK59/
+    instagram: https://www.instagram.com/candiddotorg/p/DbDd9DFDAij/
+  - kicker: '2026'
+    title: Donors want nonprofits to get out the vote
+    description: Results from a 2026 M+R donor survey, one finding per slide, followed by ways nonprofits can support voter education.
+    image: "/img/civic-education-carousel.jpg"
+    image_alt: 'First slide of the civic education carousel: Most donors expect nonprofits to educate the public on voting and elections.'
+    pdf: "/work/civic-education-carousel.pdf"
+    link: ''
+    linkedin: https://www.linkedin.com/posts/what-do-donors-expect-from-nonprofits-civic-ugcPost-7515702937239601152-RC4o/
+    instagram: https://www.instagram.com/candiddotorg/p/DebwupUl0dz/
+  - kicker: '2026'
+    title: The fundraising metrics worth tracking
+    description: Tracking too many metrics slows decisions. This carousel names the few that matter for planning, donor engagement, and measuring results, then lays out a four-step plan to collect them.
+    image: "/img/fundraising-data-carousel.jpg"
+    image_alt: 'First slide of the fundraising data carousel: The top metrics your nonprofit should track for fundraising.'
+    pdf: "/work/fundraising-data-carousel.pdf"
+    link: ''
+    linkedin: https://www.linkedin.com/posts/top-metrics-your-nonprofit-should-track-for-ugcPost-7480942633758973953-AgFy/
+    instagram: https://www.instagram.com/candiddotorg/p/DakkdfvDxWC/
+  - kicker: '2026'
+    title: Breaking the scarcity vow
+    description: Names the habit of nonprofit leaders quietly accepting less, shows how it hits women and leaders of color hardest, and ends with what leaders, boards, and funders can do about it.
+    image: "/img/scarcity-vow-carousel.jpg"
+    image_alt: 'First slide of the scarcity vow carousel: Are you asking for less than you deserve?'
+    pdf: "/work/scarcity-vow-carousel.pdf"
+    link: ''
+    linkedin: https://www.linkedin.com/posts/what-you-need-to-know-about-the-scarcity-ugcPost-7470799555836530688-yfan/
+    instagram: https://www.instagram.com/p/DZceK9ejqlx/
+- label: Writing
+  heading: Blog posts for Candid insights
+  anchor: blog-posts
+  intro: ''
+  layout: text
+  button: Read the post
+  items:
+  - kicker: Data story · Candid insights
+    title: 'Candid''s 2024 Nonprofit Compensation Report: Executive compensation is on the rise, but not for everyone'
+    description: Benchmark data for staff and executive pay, plus trends like top-earning program areas and whose salaries are rising or falling.
+    image: ''
+    image_alt: ''
+    pdf: ''
+    link: https://candid.org/blogs/2024-nonprofit-compensation-report-benchmarks-data-recent-trends/
+    linkedin: ''
+    instagram: ''
+  - kicker: Report launch · Candid insights
+    title: 'Bursting at the seams: Candid''s largest nonprofit compensation report yet'
+    description: A first look at the most complete source of nonprofit compensation data, built on executive salaries from Form 990 filings.
+    image: ''
+    image_alt: ''
+    pdf: ''
+    link: https://candid.org/blogs/candids-largest-nonprofit-compensation-report-yet/
+    linkedin: ''
+    instagram: ''
+  - kicker: How-to · Candid insights
+    title: Launching a successful nonprofit communications campaign
+    description: A practical guide to planning and launching a campaign that gets the word out about mission-driven work.
+    image: ''
+    image_alt: ''
+    pdf: ''
+    link: https://candid.org/blogs/launching-a-successful-nonprofit-communications-campaign/
+    linkedin: ''
+    instagram: ''
+- label: Email
+  heading: Candid insights newsletter
+  anchor: emails
+  intro: I owned strategy, content, segmentation, testing, and deployment for Candid's biweekly newsletter to **over 500,000 subscribers**, reaching a **40% open rate** and **doubling click-through** from 1% to 2%.
+  layout: text
+  button: View the email
+  items:
+  - kicker: April 2026
+    title: Pushing back on the overhead myth
+    description: A response to the federal fraud task force that names nonprofits, plus a featured chart on board gender representation at women-led nonprofits.
+    image: ''
+    image_alt: ''
+    pdf: "/work/candid-insights-april-2026.pdf"
+    link: ''
+    linkedin: ''
+    instagram: ''
+  - kicker: May 2026
+    title: Setting the record straight on nonprofit funding
+    description: Why stale financials make donors suspicious, plus a featured chart on how revenue mix differs between large and small nonprofits.
+    image: ''
+    image_alt: ''
+    pdf: "/work/candid-insights-may-2026.pdf"
+    link: ''
+    linkedin: ''
+    instagram: ''
+  - kicker: June 2026
+    title: Retaining funders beats chasing new ones
+    description: Why keeping current funders pays off more than chasing new ones, with a chart showing Gen Z gave at a higher rate than any other generation.
+    image: ''
+    image_alt: ''
+    pdf: "/work/candid-insights-june-2026.pdf"
+    link: ''
+    linkedin: ''
+    instagram: ''
+  - kicker: July 2026
+    title: Making the case for earned revenue
+    description: Why nonprofits shouldn't shy away from charging for their work, with a chart showing very small nonprofits get just 0.4% of foundation funding.
+    image: ''
+    image_alt: ''
+    pdf: "/work/candid-insights-july-2026.pdf"
+    link: ''
+    linkedin: ''
+    instagram: ''
+- label: Web
+  heading: Landing pages for Candid
+  anchor: web-pages
+  intro: ''
+  layout: text
+  button: Visit the page
+  items:
+  - kicker: Hub page · candid.org
+    title: Strengthening the nonprofit sector
+    description: The home for Candid's sector-wide work, bringing Demographics via Candid, fiscally sponsored projects, and the defense of the sector together on one page.
+    image: ''
+    image_alt: ''
+    pdf: ''
+    link: https://candid.org/impact-insights/strengthening-the-nonprofit-sector/
+    linkedin: ''
+    instagram: ''
+  - kicker: Campaign page · candid.org
+    title: Demographics via Candid
+    description: Explains how nonprofits share demographic data once and funders reuse it, with steps to join, the partner network, and six free ways to access the data.
+    image: ''
+    image_alt: ''
+    pdf: ''
+    link: https://candid.org/impact-insights/strengthening-the-nonprofit-sector/demographics-via-candid/
+    linkedin: ''
+    instagram: ''
+  - kicker: Campaign page · candid.org
+    title: Defending the nonprofit sector
+    description: How Candid supports nonprofits through funding cuts, misinformation, and policy shifts, from rapid response research to free trainings and resources.
+    image: ''
+    image_alt: ''
+    pdf: ''
+    link: https://candid.org/defending-the-nonprofit-sector/
+    linkedin: ''
+    instagram: ''
+- label: Campaign collateral
+  heading: Demographics via Candid flyers
+  anchor: ''
+  intro: ''
+  layout: images
+  button: View PDF
+  items:
+  - kicker: One-pager · Nonprofit audience
+    title: Nonprofit contributors
+    description: Shows nonprofits how to share demographic data once, through their Candid profile, instead of filling out the same request for every funder.
+    image: "/img/dvc-nonprofit-flyer.jpg"
+    image_alt: Demographics via Candid flyer for nonprofit contributors.
+    pdf: "/work/dvc-nonprofit-flyer.pdf"
+    link: ''
+    linkedin: ''
+    instagram: ''
+  - kicker: One-pager · Funder audience
+    title: Become a champion
+    description: The version of the same campaign for funders. The campaign recruited nearly 200 partners.
+    image: "/img/dvc-champion-flyer.jpg"
+    image_alt: Demographics via Candid flyer inviting funders to become a champion.
+    pdf: "/work/dvc-champion-flyer.pdf"
+    link: ''
+    linkedin: ''
+    instagram: ''

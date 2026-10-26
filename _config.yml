@@ -1,0 +1,6 @@
+# GitHub Pages builds the site with Jekyll. Page content lives in _data/ and is edited through Pages CMS (.pages.yml).
+exclude:
+  - README.md
+kramdown:
+  # Keep apostrophes and quotes as typed rather than curling them
+  smart_quotes: ["apos", "apos", "quot", "quot"]

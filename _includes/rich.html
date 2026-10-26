@@ -1,0 +1,6 @@
+{%- comment -%}
+  Renders a Markdown field from the editor. External links get the site's link style and open in a new tab.
+  Pass inline=true for one-line fields so the text isn't wrapped in a paragraph.
+{%- endcomment -%}
+{%- assign html = include.text | markdownify | replace: '<a href="http', '<a class="ext" target="_blank" rel="noopener" href="http' | strip -%}
+{%- if include.inline -%}{{ html | remove: '<p>' | remove: '</p>' }}{%- else -%}{{ html }}{%- endif -%}

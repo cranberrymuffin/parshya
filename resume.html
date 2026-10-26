@@ -1,3 +1,6 @@
+---
+# Content comes from _data/resume.yml
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,16 +44,17 @@
 </nav>
 
 <main>
+{%- assign r = site.data.resume %}
 <article class="resume wrap">
   <header class="r-head">
-    <img class="r-photo" src="img/headshot.png" alt="Parshya Kavoosi" width="180" height="180" />
+    <img class="r-photo" src="{{ r.photo }}" alt="{{ r.name | escape }}" width="180" height="180" />
     <div>
-    <h1>Parshya Kavoosi</h1>
-    <p class="r-title">Digital communications &amp; marketing manager</p>
+    <h1>{{ r.name | escape }}</h1>
+    <p class="r-title">{{ r.title | escape }}</p>
     <p class="r-contact">
-      <span><span class="emoji emoji-pin" aria-hidden="true">📍</span>Richmond, VA</span>
-      <a href="mailto:parshya.kavoosi@gmail.com"><span class="emoji" aria-hidden="true">💌</span>parshya.kavoosi@gmail.com ↗</a>
-      <a href="https://www.linkedin.com/in/parshya-kavoosi/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
+      <span><span class="emoji emoji-pin" aria-hidden="true">📍</span>{{ r.location | escape }}</span>
+      <a href="mailto:{{ r.email }}"><span class="emoji" aria-hidden="true">💌</span>{{ r.email | escape }} ↗</a>
+      <a href="{{ r.linkedin }}" target="_blank" rel="noopener">{% include icon-linkedin.html %}LinkedIn ↗</a>
     </p>
     </div>
   </header>
@@ -58,146 +62,65 @@
   <section class="r-sec">
     <h2>About</h2>
     <div class="r-body">
-      <p>I'm passionate about coming up with creative solutions that make an impact across my organization and the sector as a whole.</p>
-      <p>With over six years of nonprofit experience, I've gone from executing marketing and communications strategies to driving them from beginning to end. At Candid, that meant running the website, the biweekly newsletter, and SEO for the blog.</p>
+      {% include rich.html text=r.about %}
     </div>
   </section>
 
   <section class="r-sec">
     <h2>Experience</h2>
+  {%- for job in r.jobs %}
   <div class="org">
     <div>
-      <h3><a class="ext" href="https://candid.org/" target="_blank" rel="noopener">Candid</a></h3>
-      <p class="sub">Full-time · Remote · 6 yrs 7 mos</p>
-      <p class="sub">Jan 2020 – Jul 2026</p>
+      <h3>{% if job.org_link.size > 0 %}<a class="ext" href="{{ job.org_link }}" target="_blank" rel="noopener">{{ job.org | escape }}</a>{% else %}{{ job.org | escape }}{% endif %}</h3>
+      {%- if job.extra_line.size > 0 %}
+      <p class="sub">{% include rich.html text=job.extra_line inline=true %}</p>
+      {%- endif %}
+      {%- if job.details.size > 0 %}
+      <p class="sub">{{ job.details | escape }}</p>
+      {%- endif %}
+      {%- if job.dates.size > 0 %}
+      <p class="sub">{{ job.dates | escape }}</p>
+      {%- endif %}
     </div>
-    <div class="roles">
+    {%- comment %} Several roles at one org get the promotion-tree styling {% endcomment %}
+    <div{% if job.roles.size > 1 %} class="roles"{% endif %}>
+      {%- for role in job.roles %}
       <div class="role">
-        <h4>Senior Communications Specialist</h4>
-        <p class="when">Jan 2025 – Jul 2026</p>
-        <ul>
-          <li>Led the cross-functional launch of the new <strong><a class="ext" href="https://candid.org/" target="_blank" rel="noopener">candid.org</a></strong>, partnering across divisions on new pages, content updates, and user experience, growing website users <strong>75% within six months</strong>.</li>
-          <li>Owned email strategy, content, segmentation, testing, and deployment for the biweekly newsletter to <strong>500K+ subscribers</strong>, reaching a <strong>40% open rate</strong> and doubling click-through from 1% to 2%.</li>
-          <li>Directed SEO strategy for Candid's blog, from keyword research to on-page optimization and performance monitoring, growing blog users <strong>200%</strong>.</li>
-        </ul>
+        <h4>{{ role.title | escape }}{% if role.team.size > 0 %}, {% if role.team_link.size > 0 %}<a class="ext" href="{{ role.team_link }}" target="_blank" rel="noopener">{{ role.team | escape }}</a>{% else %}{{ role.team | escape }}{% endif %}{% endif %}</h4>
+        {%- if role.dates.size > 0 %}
+        <p class="when">{{ role.dates | escape }}</p>
+        {%- endif %}
+        {% include rich.html text=role.highlights %}
       </div>
-      <div class="role">
-        <h4>Brand Campaigns Specialist</h4>
-        <p class="when">Jul 2022 – Dec 2024</p>
-        <ul>
-          <li>Created social media messaging and designed content that translated complex topics into accessible information, lifting LinkedIn engagement <strong>50%</strong>.</li>
-          <li>Managed the multichannel strategy for the national <strong>Demographics via Candid</strong> campaign across email, social, and content marketing, recruiting <strong>nearly 200 partners</strong>.</li>
-          <li>Led planning, content, promotion, and logistics for three or four webinars a year, each drawing <strong>500+ registrants</strong>.</li>
-        </ul>
-      </div>
-      <div class="role">
-        <h4>Marketing Specialist</h4>
-        <p class="when">Aug 2021 – Jun 2022</p>
-        <ul>
-          <li>Managed Candid's client-facing third-party email marketing program, generating <strong>$30,000 a month</strong> in revenue.</li>
-          <li>Drove a national social media campaign on digital storytelling that brought in <strong>5 to 10 new community partners</strong> a month.</li>
-          <li>Led integrated paid social and digital campaigns for Candid's digital learning tools and global portals, raising average monthly web visits <strong>20%</strong>.</li>
-        </ul>
-      </div>
-      <div class="role">
-        <h4>Digital Marketing Associate</h4>
-        <p class="when">Jan 2020 – Jul 2021</p>
-        <ul>
-          <li>Executed a multi-channel brand awareness campaign that brought <strong>45,000+ new users</strong> to <a class="ext" href="https://candid.org/" target="_blank" rel="noopener">candid.org</a>.</li>
-          <li>Used Google Analytics and Google Search Console data to optimize Candid's web properties, growing monthly active users <strong>15%</strong>.</li>
-        </ul>
-      </div>
+      {%- endfor %}
     </div>
   </div>
-
-  <div class="org">
-    <div>
-      <h3><a class="ext" href="https://www.rhsmith.umd.edu/" target="_blank" rel="noopener">University of Maryland, Robert H. Smith School of Business</a></h3>
-      <p class="sub">Internship · Hybrid · 7 mos</p>
-      <p class="sub">Jan 2019 – Jul 2019</p>
-    </div>
-    <div>
-      <div class="role">
-        <h4>Digital Marketing Intern, <a class="ext" href="https://www.rhsmith.umd.edu/centers-initiatives/social-value-creation" target="_blank" rel="noopener">Center for Social Value Creation</a></h4>
-        <ul>
-          <li>Promoted the center's opportunities and raised its visibility in the business community by designing its <strong>heavily read newsletter</strong> and managing all of its social media accounts.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="org">
-    <div>
-      <h3><a class="ext" href="https://www.weddingwire.com/" target="_blank" rel="noopener">WeddingWire</a></h3>
-      <p class="sub">Now <a class="ext" href="https://www.theknotww.com/" target="_blank" rel="noopener">The Knot Worldwide</a></p>
-      <p class="sub">Part-time · Remote · 1 yr 4 mos</p>
-      <p class="sub">Jan 2018 – Apr 2019</p>
-    </div>
-    <div>
-      <div class="role">
-        <h4>Content Creator</h4>
-        <ul>
-          <li>Wrote <strong>30 professional descriptions a week</strong> for wedding vendors so they could promote themselves on WeddingWire and reach couples in the middle of planning their weddings.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="org">
-    <div>
-      <h3><a class="ext" href="https://wmuc.umd.edu/" target="_blank" rel="noopener">WMUC Radio</a></h3>
-      <p class="sub">University of Maryland</p>
-      <p class="sub">Seasonal · On-site · 3 yrs 5 mos</p>
-      <p class="sub">Jan 2016 – May 2019</p>
-    </div>
-    <div>
-      <div class="role">
-        <h4>Radio DJ &amp; Music Critic</h4>
-        <ul>
-          <li>Hosted a weekly, hour-long informative radio show exploring music from cultural influences on hip hop to one-hit wonders.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  {%- endfor %}
   </section>
 
   <section class="r-sec r-grid">
     <div>
-      <h2>Core capabilities</h2>
+      <h2>{{ r.skills_heading | escape }}</h2>
       <ul class="skills">
-        <li>Content marketing</li>
-        <li>Website management</li>
-        <li>SEO strategy</li>
-        <li>Campaign strategy</li>
-        <li>Graphic design</li>
-        <li>Email marketing</li>
-        <li>Social media strategy</li>
-        <li>Webinars &amp; events</li>
+        {%- for skill in r.skills %}
+        <li>{{ skill | escape }}</li>
+        {%- endfor %}
       </ul>
     </div>
     <div>
-      <h2>Platforms &amp; tools</h2>
+      <h2>{{ r.tools_heading | escape }}</h2>
       <ul class="skills">
-        <li>Salesforce Marketing Cloud</li>
-        <li>WordPress</li>
-        <li>Google Analytics</li>
-        <li>Google Search Console</li>
-        <li>Google Ads</li>
-        <li>Meta Ads Manager</li>
-        <li>LinkedIn Campaign Manager</li>
-        <li>Semrush</li>
-        <li>Canva</li>
-        <li>HubSpot</li>
-        <li>Jira</li>
-        <li>Asana</li>
+        {%- for tool in r.tools %}
+        <li>{{ tool | escape }}</li>
+        {%- endfor %}
       </ul>
     </div>
   </section>
 
   <section class="r-sec">
     <h2>Education</h2>
-    <p class="r-edu"><strong>B.S. in Marketing and International Business</strong><br>
-    <span><a class="ext" href="https://www.rhsmith.umd.edu/" target="_blank" rel="noopener">Robert H. Smith School of Business, University of Maryland</a></span></p>
+    <p class="r-edu"><strong>{{ r.degree | escape }}</strong><br>
+    <span>{% if r.school_link.size > 0 %}<a class="ext" href="{{ r.school_link }}" target="_blank" rel="noopener">{{ r.school | escape }}</a>{% else %}{{ r.school | escape }}{% endif %}</span></p>
   </section>
 </article>
 </main>

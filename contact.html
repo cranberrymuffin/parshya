@@ -1,3 +1,6 @@
+---
+# Content comes from _data/contact.yml
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,14 +44,15 @@
 </nav>
 
 <main>
+{%- assign contact = site.data.contact %}
 <section class="contact page" id="contact">
   <div class="wrap">
     <p class="label">Contact</p>
-    <h1>Get in touch</h1>
-    <p>If you need a communications, content, or digital marketing manager who can turn complex topics into stories people want to read, I'm here.</p>
+    <h1>{{ contact.heading | escape }}</h1>
+    <p>{{ contact.text | escape }}</p>
     <div class="cta">
-      <a class="btn primary" href="mailto:parshya.kavoosi@gmail.com">Email me</a>
-      <a class="btn" href="https://www.linkedin.com/in/parshya-kavoosi/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn primary" href="mailto:{{ contact.email }}">Email me</a>
+      <a class="btn" href="{{ contact.linkedin }}" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
   </div>
 </section>

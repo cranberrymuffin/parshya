@@ -1,3 +1,6 @@
+---
+# Content comes from _data/home.yml
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,14 +45,17 @@
 </nav>
 
 <main>
+{%- assign home = site.data.home %}
+{%- comment %} Link each rotating word to the portfolio section it names {% endcomment %}
+{%- capture links %}{% for item in home.rotating_words %}{% assign href = "portfolio.html" %}{% for section in site.data.portfolio.sections %}{% if section.label == item.section %}{% assign anchor = section.anchor | default: section.label | slugify %}{% assign href = "portfolio.html#" | append: anchor %}{% endif %}{% endfor %}{{ href }}|{% endfor %}{% endcapture %}
+{%- assign links = links | split: "|" %}
 <header class="hero wrap" >
-  <h1 style="margin-top:0">Parshya Kavoosi</h1>
-  <p class="lede">I'm a digital communications and marketing manager. I take complex topics and turn them into easy-to-read <span class="rotator" aria-hidden="true"><a href="portfolio.html#blog-posts" tabindex="-1">blog posts.</a><a href="portfolio.html#emails" tabindex="-1">emails.</a><a href="portfolio.html#social-posts" tabindex="-1">social posts.</a></span><span class="rotator-text"><a href="portfolio.html#blog-posts">blog posts</a>, <a href="portfolio.html#emails">emails</a>, and <a href="portfolio.html#social-posts">social posts</a>.</span></p>
+  <h1 style="margin-top:0">{{ home.name | escape }}</h1>
+  <p class="lede">{{ home.intro | escape }} <span class="rotator" aria-hidden="true">{% for item in home.rotating_words %}<a href="{{ links[forloop.index0] }}" tabindex="-1">{{ item.word | escape }}.</a>{% endfor %}</span><span class="rotator-text">{% for item in home.rotating_words %}{% unless forloop.first %}{% if forloop.last %}{% if forloop.length > 2 %},{% endif %} and {% else %}, {% endif %}{% endunless %}<a href="{{ links[forloop.index0] }}">{{ item.word | escape }}</a>{% endfor %}.</span></p>
   <div class="stats">
-    <div class="stat"><b data-count="2" data-from="1" data-decimals="1" data-suffix="×">2×</b><span>newsletter click-through rate</span></div>
-    <div class="stat"><b data-count="500" data-suffix="K+">500K+</b><span>newsletter subscribers, with a 40% open rate</span></div>
-    <div class="stat"><b data-count="75" data-prefix="+" data-suffix="%">+75%</b><span>website users within six months of the new candid.org</span></div>
-    <div class="stat"><b data-count="200" data-prefix="+" data-suffix="%">+200%</b><span>blog users from SEO strategy</span></div>
+    {%- for stat in home.stats %}
+    <div class="stat"><b>{{ stat.number | escape }}</b><span>{{ stat.caption | escape }}</span></div>
+    {%- endfor %}
   </div>
   <div class="cta">
     <a class="btn primary" href="contact.html">Get in touch</a>
@@ -82,9 +88,13 @@
   // Count the home stats up from zero as they fade in
   (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.querySelectorAll('.stat b[data-count]').forEach(function (el, i) {
-      var to = +el.dataset.count, from = +(el.dataset.from || 0), dec = +(el.dataset.decimals || 0);
-      var pre = el.dataset.prefix || '', suf = el.dataset.suffix || '', final = el.textContent;
+    document.querySelectorAll('.stat b').forEach(function (el, i) {
+      // Split the stat as typed (e.g. "+75%", "500K+", "2×") into what's around the number and the number itself
+      var final = el.textContent, m = final.match(/^(\D*?)(\d[\d,]*(?:\.\d+)?)(.*)$/);
+      if (!m) return;
+      var pre = m[1], suf = m[3], to = +m[2].replace(/,/g, '');
+      // Small numbers count with a decimal from halfway, so "2×" runs 1.0 → 2.0 rather than jumping 0, 1, 2
+      var dec = to < 10 ? 1 : (m[2].split('.')[1] || '').length, from = to < 10 ? to / 2 : 0;
       var delay = 260 + i * 80, dur = 1200, start = null;
       el.textContent = pre + from.toFixed(dec) + suf;
       function tick(t) {

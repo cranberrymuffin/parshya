@@ -1,3 +1,6 @@
+---
+# Content comes from _data/portfolio.yml
+---
 <!doctype html>
 <html lang="en">
   <head>
@@ -47,342 +50,71 @@
     </nav>
 
     <main>
-      <section class="wrap" id="social-posts">
+      {%- for section in site.data.portfolio.sections %}
+      {%- assign anchor = section.anchor | default: section.label | slugify %}
+
+      <section class="wrap" id="{{ anchor }}">
+        {%- if forloop.first %}
         <h1 class="sr-only">Portfolio</h1>
-        <p class="label">Social media</p>
-        <h3 class="group">Data carousels</h3>
+        {%- endif %}
+        <p class="label">{{ section.label | escape }}</p>
+        <h3 class="group">{{ section.heading | escape }}</h3>
+        {%- if section.intro.size > 0 %}
+        <p class="intro">{% include rich.html text=section.intro inline=true %}</p>
+        {%- endif %}
+        {%- if section.layout == "images" %}
         <div class="pieces">
+          {%- for item in section.items %}
+          {%- assign href = item.pdf | default: item.link %}
+          {%- if item.linkedin.size > 0 or item.instagram.size > 0 %}
           <div class="piece">
-            <a href="work/mission-over-myth-carousel.pdf" target="_blank" rel="noopener">
-              <img
-                src="img/mission-over-myth-carousel.jpg"
-                alt="First slide of the Mission over myth carousel: Nonprofit funding is more than just donations."
-                loading="lazy"
-              />
+            <a href="{{ href }}" target="_blank" rel="noopener">
+              <img src="{{ item.image }}" alt="{{ item.image_alt | escape }}" loading="lazy" />
             </a>
             <div>
-              <span class="kicker"
-                >2026</span
-              >
-              <h4>Mission over myth: earned income</h4>
-              <p>
-                A myth-vs-fact series on earned income, which makes up over 70%
-                of nonprofit revenue. It ends with what nonprofits should and
-                shouldn't do about the myth.
-              </p>
+              <span class="kicker">{{ item.kicker | escape }}</span>
+              <h4>{{ item.title | escape }}</h4>
+              <p>{{ item.description | escape }}</p>
             </div>
             <p class="links">
-              <a href="work/mission-over-myth-carousel.pdf" target="_blank" rel="noopener">PDF ↗</a>
-              <a href="https://www.linkedin.com/posts/mission-over-myth-demystifying-nonprofit-ugcPost-7485294767325650945-WK59/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
-              <a href="https://www.instagram.com/candiddotorg/p/DbDd9DFDAij/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1.6" y="1.6" width="20.8" height="20.8" rx="6"/><circle cx="12" cy="12" r="4.8"/><circle cx="18.2" cy="5.8" r="1.4" fill="currentColor" stroke="none"/></svg>Instagram ↗</a>
+              {%- if item.pdf.size > 0 %}
+              <a href="{{ item.pdf }}" target="_blank" rel="noopener">PDF ↗</a>
+              {%- endif %}
+              {%- if item.linkedin.size > 0 %}
+              <a href="{{ item.linkedin }}" target="_blank" rel="noopener">{% include icon-linkedin.html %}LinkedIn ↗</a>
+              {%- endif %}
+              {%- if item.instagram.size > 0 %}
+              <a href="{{ item.instagram }}" target="_blank" rel="noopener">{% include icon-instagram.html %}Instagram ↗</a>
+              {%- endif %}
             </p>
           </div>
-          <div class="piece">
-            <a href="work/civic-education-carousel.pdf" target="_blank" rel="noopener">
-              <img
-                src="img/civic-education-carousel.jpg"
-                alt="First slide of the civic education carousel: Most donors expect nonprofits to educate the public on voting and elections."
-                loading="lazy"
-              />
-            </a>
+          {%- else %}
+          <a class="piece" href="{{ href }}" target="_blank" rel="noopener">
+            <img src="{{ item.image }}" alt="{{ item.image_alt | escape }}" loading="lazy" />
             <div>
-              <span class="kicker"
-                >2026</span
-              >
-              <h4>Donors want nonprofits to get out the vote</h4>
-              <p>
-                Results from a 2026 M+R donor survey, one finding per slide,
-                followed by ways nonprofits can support voter education.
-              </p>
+              <span class="kicker">{{ item.kicker | escape }}</span>
+              <h4>{{ item.title | escape }}</h4>
+              <p>{{ item.description | escape }}</p>
             </div>
-            <p class="links">
-              <a href="work/civic-education-carousel.pdf" target="_blank" rel="noopener">PDF ↗</a>
-              <a href="https://www.linkedin.com/posts/what-do-donors-expect-from-nonprofits-civic-ugcPost-7515702937239601152-RC4o/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
-              <a href="https://www.instagram.com/candiddotorg/p/DebwupUl0dz/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1.6" y="1.6" width="20.8" height="20.8" rx="6"/><circle cx="12" cy="12" r="4.8"/><circle cx="18.2" cy="5.8" r="1.4" fill="currentColor" stroke="none"/></svg>Instagram ↗</a>
-            </p>
-          </div>
-          <div class="piece">
-            <a href="work/fundraising-data-carousel.pdf" target="_blank" rel="noopener">
-              <img
-                src="img/fundraising-data-carousel.jpg"
-                alt="First slide of the fundraising data carousel: The top metrics your nonprofit should track for fundraising."
-                loading="lazy"
-              />
-            </a>
-            <div>
-              <span class="kicker"
-                >2026</span
-              >
-              <h4>The fundraising metrics worth tracking</h4>
-              <p>
-                Tracking too many metrics slows decisions. This carousel names
-                the few that matter for planning, donor engagement, and
-                measuring results, then lays out a four-step plan to collect
-                them.
-              </p>
-            </div>
-            <p class="links">
-              <a href="work/fundraising-data-carousel.pdf" target="_blank" rel="noopener">PDF ↗</a>
-              <a href="https://www.linkedin.com/posts/top-metrics-your-nonprofit-should-track-for-ugcPost-7480942633758973953-AgFy/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
-              <a href="https://www.instagram.com/candiddotorg/p/DakkdfvDxWC/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1.6" y="1.6" width="20.8" height="20.8" rx="6"/><circle cx="12" cy="12" r="4.8"/><circle cx="18.2" cy="5.8" r="1.4" fill="currentColor" stroke="none"/></svg>Instagram ↗</a>
-            </p>
-          </div>
-          <div class="piece">
-            <a href="work/scarcity-vow-carousel.pdf" target="_blank" rel="noopener">
-              <img
-                src="img/scarcity-vow-carousel.jpg"
-                alt="First slide of the scarcity vow carousel: Are you asking for less than you deserve?"
-                loading="lazy"
-              />
-            </a>
-            <div>
-              <span class="kicker"
-                >2026</span
-              >
-              <h4>Breaking the scarcity vow</h4>
-              <p>
-                Names the habit of nonprofit leaders quietly accepting less,
-                shows how it hits women and leaders of color hardest, and ends
-                with what leaders, boards, and funders can do about it.
-              </p>
-            </div>
-            <p class="links">
-              <a href="work/scarcity-vow-carousel.pdf" target="_blank" rel="noopener">PDF ↗</a>
-              <a href="https://www.linkedin.com/posts/what-you-need-to-know-about-the-scarcity-ugcPost-7470799555836530688-yfan/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
-              <a href="https://www.instagram.com/p/DZceK9ejqlx/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1.6" y="1.6" width="20.8" height="20.8" rx="6"/><circle cx="12" cy="12" r="4.8"/><circle cx="18.2" cy="5.8" r="1.4" fill="currentColor" stroke="none"/></svg>Instagram ↗</a>
-            </p>
-          </div>
+            <span class="more">{{ section.button | escape }} ↗</span>
+          </a>
+          {%- endif %}
+          {%- endfor %}
         </div>
-      </section>
-
-      <section class="wrap" id="blog-posts">
-        <p class="label">Writing</p>
-        <h3 class="group">Blog posts for Candid insights</h3>
+        {%- else %}
         <div class="posts">
-          <a
-            class="post"
-            href="https://candid.org/blogs/2024-nonprofit-compensation-report-benchmarks-data-recent-trends/"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">Data story · Candid insights</span>
-            <h4>
-              Candid's 2024 Nonprofit Compensation Report: Executive
-              compensation is on the rise, but not for everyone
-            </h4>
-            <p>
-              Benchmark data for staff and executive pay, plus trends like
-              top-earning program areas and whose salaries are rising or
-              falling.
-            </p>
-            <span class="more">Read the post ↗</span>
+          {%- for item in section.items %}
+          <a class="post" href="{{ item.link | default: item.pdf }}" target="_blank" rel="noopener">
+            <span class="kicker">{{ item.kicker | escape }}</span>
+            <h4>{{ item.title | escape }}</h4>
+            <p>{{ item.description | escape }}</p>
+            <span class="more">{{ section.button | escape }} ↗</span>
           </a>
-          <a
-            class="post"
-            href="https://candid.org/blogs/candids-largest-nonprofit-compensation-report-yet/"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">Report launch · Candid insights</span>
-            <h4>
-              Bursting at the seams: Candid's largest nonprofit compensation
-              report yet
-            </h4>
-            <p>
-              A first look at the most complete source of nonprofit compensation
-              data, built on executive salaries from Form 990 filings.
-            </p>
-            <span class="more">Read the post ↗</span>
-          </a>
-          <a
-            class="post"
-            href="https://candid.org/blogs/launching-a-successful-nonprofit-communications-campaign/"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">How-to · Candid insights</span>
-            <h4>Launching a successful nonprofit communications campaign</h4>
-            <p>
-              A practical guide to planning and launching a campaign that gets
-              the word out about mission-driven work.
-            </p>
-            <span class="more">Read the post ↗</span>
-          </a>
+          {%- endfor %}
         </div>
+        {%- endif %}
       </section>
-
-      <section class="wrap" id="emails">
-        <p class="label">Email</p>
-        <h3 class="group">Candid insights newsletter</h3>
-        <p class="intro">
-          I owned strategy, content, segmentation, testing, and deployment for
-          Candid's biweekly newsletter to <strong>over 500,000 subscribers</strong>, reaching a
-          <strong>40% open rate</strong> and <strong>doubling click-through</strong> from 1% to 2%.
-        </p>
-        <div class="posts">
-          <a
-            class="post"
-            href="work/candid-insights-april-2026.pdf"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">April 2026</span>
-            <h4>Pushing back on the overhead myth</h4>
-            <p>
-              A response to the federal fraud task force that names nonprofits,
-              plus a featured chart on board gender representation at
-              women-led nonprofits.
-            </p>
-            <span class="more">View the email ↗</span>
-          </a>
-          <a
-            class="post"
-            href="work/candid-insights-may-2026.pdf"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">May 2026</span>
-            <h4>Setting the record straight on nonprofit funding</h4>
-            <p>
-              Why stale financials make donors suspicious, plus a featured chart
-              on how revenue mix differs between large and small nonprofits.
-            </p>
-            <span class="more">View the email ↗</span>
-          </a>
-          <a
-            class="post"
-            href="work/candid-insights-june-2026.pdf"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">June 2026</span>
-            <h4>Retaining funders beats chasing new ones</h4>
-            <p>
-              Why keeping current funders pays off more than chasing new ones,
-              with a chart showing Gen Z gave at a higher rate than any other
-              generation.
-            </p>
-            <span class="more">View the email ↗</span>
-          </a>
-          <a
-            class="post"
-            href="work/candid-insights-july-2026.pdf"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">July 2026</span>
-            <h4>Making the case for earned revenue</h4>
-            <p>
-              Why nonprofits shouldn't shy away from charging for their work,
-              with a chart showing very small nonprofits get just 0.4% of
-              foundation funding.
-            </p>
-            <span class="more">View the email ↗</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="wrap" id="web-pages">
-        <p class="label">Web</p>
-        <h3 class="group">Landing pages for Candid</h3>
-        <div class="posts">
-          <a
-            class="post"
-            href="https://candid.org/impact-insights/strengthening-the-nonprofit-sector/"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">Hub page · candid.org</span>
-            <h4>Strengthening the nonprofit sector</h4>
-            <p>
-              The home for Candid's sector-wide work, bringing Demographics via
-              Candid, fiscally sponsored projects, and the defense of the sector
-              together on one page.
-            </p>
-            <span class="more">Visit the page ↗</span>
-          </a>
-          <a
-            class="post"
-            href="https://candid.org/impact-insights/strengthening-the-nonprofit-sector/demographics-via-candid/"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">Campaign page · candid.org</span>
-            <h4>Demographics via Candid</h4>
-            <p>
-              Explains how nonprofits share demographic data once and funders
-              reuse it, with steps to join, the partner network, and six free
-              ways to access the data.
-            </p>
-            <span class="more">Visit the page ↗</span>
-          </a>
-          <a
-            class="post"
-            href="https://candid.org/defending-the-nonprofit-sector/"
-            target="_blank"
-            rel="noopener"
-          >
-            <span class="kicker">Campaign page · candid.org</span>
-            <h4>Defending the nonprofit sector</h4>
-            <p>
-              How Candid supports nonprofits through funding cuts,
-              misinformation, and policy shifts, from rapid response research to
-              free trainings and resources.
-            </p>
-            <span class="more">Visit the page ↗</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="wrap">
-        <p class="label">Campaign collateral</p>
-        <h3 class="group">Demographics via Candid flyers</h3>
-        <div class="pieces">
-          <a
-            class="piece"
-            href="work/dvc-nonprofit-flyer.pdf"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              src="img/dvc-nonprofit-flyer.jpg"
-              alt="Demographics via Candid flyer for nonprofit contributors."
-              loading="lazy"
-            />
-            <div>
-              <span class="kicker">One-pager · Nonprofit audience</span>
-              <h4>Nonprofit contributors</h4>
-              <p>
-                Shows nonprofits how to share demographic data once, through
-                their Candid profile, instead of filling out the same request
-                for every funder.
-              </p>
-            </div>
-            <span class="more">View PDF ↗</span>
-          </a>
-          <a
-            class="piece"
-            href="work/dvc-champion-flyer.pdf"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              src="img/dvc-champion-flyer.jpg"
-              alt="Demographics via Candid flyer inviting funders to become a champion."
-              loading="lazy"
-            />
-            <div>
-              <span class="kicker">One-pager · Funder audience</span>
-              <h4>Become a champion</h4>
-              <p>
-                The version of the same campaign for funders. The campaign
-                recruited nearly 200 partners.
-              </p>
-            </div>
-            <span class="more">View PDF ↗</span>
-          </a>
-        </div>
-      </section>
+      {%- endfor %}
     </main>
 
     <footer class="wrap">© 2026 Parshya Kavoosi</footer>
