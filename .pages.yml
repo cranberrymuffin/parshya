@@ -147,7 +147,7 @@ content:
                   media: images
               - name: image_alt
                 label: Cover image description
-                description: Describe the image for people using screen readers, e.g. "First slide of the carousel: ..."
+                description: 'Describe the image for people using screen readers, e.g. "First slide of the carousel: ..."'
                 type: string
               - name: pdf
                 label: PDF
